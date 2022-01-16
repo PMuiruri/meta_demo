@@ -1,5 +1,6 @@
 # metademo
-## The challenge
+
+## The Challenge
 
 The challenge in this project was to create a simple web based dashboard that would used to explore a dataset provided by [metaplay](https://metaplay.io/). The dashboard provides user with statistics that provide insights into the game players metrics.
 

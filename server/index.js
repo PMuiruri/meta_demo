@@ -6,13 +6,13 @@ const { min, max, median, mean } = require('mathjs')
 
 const app = express();
 // app.use(cors())
-app.use(function(req, res, next){
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-METHODS', 'GET', 'POST', 'PUT', 'DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-})
+// app.use(function(req, res, next){
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-METHODS', 'GET', 'POST', 'PUT', 'DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+//   next();
+// })
 
 const getPlayers = () => {
   try {
@@ -82,7 +82,7 @@ const getPlayerPurchases = (offer) => {
 
 // Routes
 //Players
-app.get("/players", async (req, res, next) => {
+app.get("/players", cors(), async (req, res, next) => {
   try {
     const players = await getPlayers();
     res.header("Access-Control-Allow-Origin", "*");
@@ -92,7 +92,7 @@ app.get("/players", async (req, res, next) => {
   }
 });
 
-app.get("/playerstats", async (req, res, next) => {
+app.get("/playerstats", cors(),  async (req, res, next) => {
   try {
     const players = await getPlayers();
     res.header("Access-Control-Allow-Origin", "*");
@@ -135,7 +135,7 @@ app.get("/playerstats", async (req, res, next) => {
 });
 
 // Guild
-app.get("/guilds", async (req, res, next) => {
+app.get("/guilds", cors(), async (req, res, next) => {
   try {
     const guilds = await getGuilds();
     res.header("Access-Control-Allow-Origin", "*");
@@ -145,7 +145,7 @@ app.get("/guilds", async (req, res, next) => {
   }
 });
 
-app.get("/guildstats", async (req, res, next) => {
+app.get("/guildstats", cors(), async (req, res, next) => {
   try {
     const guilds = await getGuilds();
     res.header("Access-Control-Allow-Origin", "*");
@@ -178,7 +178,7 @@ app.get("/guildstats", async (req, res, next) => {
   }
 });
 //Segments
-app.get("/segments", async (req, res, next) => {
+app.get("/segments", cors(), async (req, res, next) => {
   try {
     const segments = await getSegments();
     res.header("Access-Control-Allow-Origin", "*");
@@ -188,7 +188,7 @@ app.get("/segments", async (req, res, next) => {
   }
 });
 
-app.get("/segmentstats", async (req, res, next) => {
+app.get("/segmentstats", cors(), async (req, res, next) => {
   try {
     const segments = await getSegments();
     const players = await getPlayers();
@@ -203,7 +203,7 @@ app.get("/segmentstats", async (req, res, next) => {
   }
 });
 
-app.get("/offers", async (req, res, next) => {
+app.get("/offers", cors(), async (req, res, next) => {
   try {
     const offers = await getOffers();
     res.header("Access-Control-Allow-Origin", "*");
@@ -213,7 +213,7 @@ app.get("/offers", async (req, res, next) => {
   }
 });
 
-app.get("/offerstats", async (req, res, next) => {
+app.get("/offerstats", cors(), async (req, res, next) => {
   try {
     const offers = await getOffers();
     const players = await getPlayers();
@@ -228,7 +228,7 @@ app.get("/offerstats", async (req, res, next) => {
   }
 });
 
-app.get("/guildMembers", async (req, res, next) => {
+app.get("/guildMembers", cors(), async (req, res, next) => {
   console.log("Query " + req.query.guild);
   try {
     const members = await getGuildMembers(req.query.guild);
@@ -239,7 +239,7 @@ app.get("/guildMembers", async (req, res, next) => {
   }
 });
 
-app.get("/playerSegments", async (req, res, next) => {
+app.get("/playerSegments", cors(), async (req, res, next) => {
   console.log("Query " + req.query.segment);
   try {
     const players = await getPlayerSegments(req.query.segment);

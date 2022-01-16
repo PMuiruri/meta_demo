@@ -5,13 +5,14 @@ const port = 3030;
 const { min, max, median, mean } = require('mathjs')
 
 const app = express();
-app.use(function(req, res, next){
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-METHODS', 'GET');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+app.use(cors())
+// app.use(function(req, res, next){
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-METHODS', 'GET');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+//   next()
+// })
 
 const getPlayers = () => {
   try {

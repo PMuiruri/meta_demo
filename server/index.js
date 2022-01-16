@@ -1,9 +1,12 @@
 const express = require("express");
+const cors = require('cors')
 const axios = require("axios");
+const port = 3030;
 const { min, max, median, mean } = require('mathjs')
 
 const app = express();
-const port = 3030;
+app.use(cors())
+
 
 const getPlayers = () => {
   try {

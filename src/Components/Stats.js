@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { OverviewCard, SimpleChart } from "./Card";
-import { Row } from './StyledComponents';
-import { min, max, median, mean } from 'mathjs';
-
+import { Row, H2, H3 } from './StyledComponents';
 
 export const Stats = () =>{
 
@@ -56,6 +54,7 @@ export const Stats = () =>{
 
   return(
     <>
+      <H2 green >Basic Statistics</H2>
       <Row>
         <OverviewCard name={'Highest Game Level'} amount={playerStats.maxlevel}/>
         <OverviewCard name={'Guilds with membership Above median'} amount={guildstats.numOfGuildsAboveMedian}/>
@@ -75,9 +74,11 @@ export const Stats = () =>{
         <OverviewCard name={'Amount of Users Below AVG Spend'} amount={playerStats.usersBelowMeanSpend}/>
       </Row>
       <Row>
+        <H3 green style={{ alignSelf: 'center'}}>Players By Segment</H3>
         <SimpleChart data={segmentStats}/>
       </Row>
       <Row>
+        <H3 green style={{ alignSelf: 'center'}}>Players By Offers/purchases</H3>
         <SimpleChart data={offerStats}/>
       </Row>
     </>

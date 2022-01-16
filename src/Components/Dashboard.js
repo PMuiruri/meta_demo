@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { DashboardCard } from './Card';
 import { Stats } from './Stats';
-import { Row } from './StyledComponents';
+import { Row, H1 } from './StyledComponents';
 
 export const Dashboard = () => {
 
   const [players, setPlayers] = useState([]);
   const [guilds, setGuilds] = useState([]);
-  const [guildstats, setGuildsStats] = useState([]);
   const [segments, setSegments] = useState([]);
   const [offers, setOffers] = useState([]);
 
@@ -57,6 +56,7 @@ export const Dashboard = () => {
 
   return (
     <div>
+      <H1 green style={{padding: '1em'}}>Game Dashboard</H1>
       <Row>
         <DashboardCard amount={players.length} name='Players'/>
         <DashboardCard amount={guilds.length} name='Guilds'/>

@@ -19,7 +19,7 @@ const MiniCard = styled.div`
 	height: 125px;
   background: #252B42;
   border-radius: 5px;
-  margin: 0.2em 2em;
+  margin: 0.4em 2em;
   padding: 0.1em;
   justify-content: center;
   flex-direction: column;
@@ -33,7 +33,7 @@ const H3 = styled.h3`
   text-align: center;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: #8C98C6;
+  color: ${props => props.green ? `#1EB589` : '#8C98C6'};
 `
 const H1 = styled.h1`
   font-style: normal;
@@ -42,7 +42,7 @@ const H1 = styled.h1`
   line-height: 48px;
   text-align: center;
   letter-spacing: -2px;
-  color: #FFFFFF;
+  color: ${props => props.green ? `#1EB589` : '#FFFFFF'};
 `
 const H2 = styled.h2`
   font-style: normal;
@@ -50,8 +50,8 @@ const H2 = styled.h2`
   font-size: 24px;
   line-height: 10px;
   text-align: center;
-  letter-spacing: -2px;
-  color: #FFFFFF;
+  letter-spacing: 2px;
+  color: ${props => props.green ? `#1EB589` : '#FFFFFF'};
 `
 const Text = styled.h5`
   font-style: normal;

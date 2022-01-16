@@ -159,7 +159,7 @@ app.get("/guildstats", async (req, res, next) => {
       'minGuildMembers': minGuildMembers,
       'medianGuildMembers':medianGuildMembers,
       'maxGuildMembership': maxGuildMembers,
-      'numOfEmptyGuilds': numOfEmptyGuilds,
+      'numOfEmptyGuilds': numOfEmptyGuilds.length,
       'numOfGuildsBelowMedian': numOfGuildsBelowMedian.length,
       'numOfGuildsAboveMedian': numOfGuildsAboveMedian.length,
     });

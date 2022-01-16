@@ -14,6 +14,11 @@ const app = express();
 //   next();
 // })
 
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 const getPlayers = () => {
   try {
     return axios.get('http://localhost:3000/players/?limit=100')
@@ -82,11 +87,12 @@ const getPlayerPurchases = (offer) => {
 
 // Routes
 //Players
-app.get("/players", cors(), async (req, res, next) => {
+app.get("/players", cors(corsOptions), async (req, res, next) => {
   try {
     const players = await getPlayers();
-    res.header("Access-Control-Allow-Origin", "*");
-    res.status(200).json(JSON.parse(players));
+    // res.header("Access-Control-Allow-Origin", "*");
+   // res.status(200).json(JSON.parse(players));
+    res.json(JSON.parse(players));
   } catch (error) {
     res.status(500).send(error.toString());
   }

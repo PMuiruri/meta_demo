@@ -1,5 +1,7 @@
 const express = require("express");
 const axios = require("axios");
+const { min, max, median, mean } = require('mathjs')
+
 const app = express();
 const port = 3030;
 
@@ -70,10 +72,10 @@ const getPlayerPurchases = (offer) => {
 }
 
 // Routes
+//Players
 app.get("/players", async (req, res, next) => {
   try {
     const players = await getPlayers();
-    console.log(players.length)
     res.header("Access-Control-Allow-Origin", "*");
     res.status(200).json(JSON.parse(players));
   } catch (error) {
@@ -81,6 +83,49 @@ app.get("/players", async (req, res, next) => {
   }
 });
 
+app.get("/playerstats", async (req, res, next) => {
+  try {
+    const players = await getPlayers();
+    res.header("Access-Control-Allow-Origin", "*");
+
+    //level stats
+    const levels = JSON.parse(players).map(item => item.level);
+    const maxlevel = max(levels);
+    const minlevel = min(levels);
+    const medianlevel = median(levels);
+
+    //login stats
+    const logins = !players ? null : JSON.parse(players).map(item => item.totalLogins)
+    const maxlogins = max(logins)
+    const minlogins =  min(logins);
+    const medianlogins = median(logins);
+  
+    //spend stats
+    const spend = !players ? null : JSON.parse(players).map(item => item.totalSpend);
+    const maxspend = max(spend);
+    const minspend = min(spend);
+    const meanspend = mean(spend).toFixed(2)
+    
+    const usersBelowMeanSpend = spend.filter(item => item < meanspend)
+
+    res.status(200).json({
+      'minlevel':minlevel,
+      'medianlevel':medianlevel,
+      'maxlevel': maxlevel,
+      'minlogins': minlogins,
+      'medianlogins': medianlogins,
+      'maxlogins': maxlogins,
+      'minspend': minspend,
+      'meanspend': meanspend,
+      'maxspend': maxspend,
+      'usersBelowMeanSpend': usersBelowMeanSpend.length
+    });
+  } catch (error) {
+    res.status(500).send(error.toString());
+  }
+});
+
+// Guild
 app.get("/guilds", async (req, res, next) => {
   try {
     const guilds = await getGuilds();
@@ -91,6 +136,39 @@ app.get("/guilds", async (req, res, next) => {
   }
 });
 
+app.get("/guildstats", async (req, res, next) => {
+  try {
+    const guilds = await getGuilds();
+    res.header("Access-Control-Allow-Origin", "*");
+
+    const guildmemberscount = JSON.parse(guilds).map(item => {
+      return {id: item.id, count: item.memberIds.length}
+    })  
+    // Guilds
+    const GuildMembers = guildmemberscount.map(item => item.count)
+  
+    const maxGuildMembers = !GuildMembers.length ? null : max(GuildMembers)
+    const medianGuildMembers = !GuildMembers.length ? null : median(GuildMembers)
+    const minGuildMembers = !GuildMembers.length ? null : min(GuildMembers)
+    
+    const numOfEmptyGuilds = GuildMembers.filter(item => item === 0)
+    const numOfGuildsBelowMedian = GuildMembers.filter(item => item <= medianGuildMembers)
+    const numOfGuildsAboveMedian = GuildMembers.filter(item => item > medianGuildMembers)
+
+    res.status(200).json({
+      'minGuildMembers': minGuildMembers,
+      'medianGuildMembers':medianGuildMembers,
+      'maxGuildMembership': maxGuildMembers,
+      'numOfEmptyGuilds': numOfEmptyGuilds,
+      'numOfGuildsBelowMedian': numOfGuildsBelowMedian.length,
+      'numOfGuildsAboveMedian': numOfGuildsAboveMedian.length,
+    });
+  } catch (error) {
+    console.log('guildstats endpoint failed')
+    res.status(500).send(error.toString());
+  }
+});
+//Segments
 app.get("/segments", async (req, res, next) => {
   try {
     const segments = await getSegments();
@@ -101,11 +179,41 @@ app.get("/segments", async (req, res, next) => {
   }
 });
 
+app.get("/segmentstats", async (req, res, next) => {
+  try {
+    const segments = await getSegments();
+    const players = await getPlayers();
+    res.header("Access-Control-Allow-Origin", "*");
+    const segmentStats = JSON.parse(segments).flatMap(segment =>{
+      let stat = JSON.parse(players).filter(player => player.segments.includes(segment.id))
+      return {name: segment.id, stats: stat.length}
+     })
+    res.status(200).json(segmentStats);
+  } catch (error) {
+    res.status(500).send(error.toString());
+  }
+});
+
 app.get("/offers", async (req, res, next) => {
   try {
     const offers = await getOffers();
     res.header("Access-Control-Allow-Origin", "*");
     res.status(200).json(JSON.parse(offers));
+  } catch (error) {
+    res.status(500).send(error.toString());
+  }
+});
+
+app.get("/offerstats", async (req, res, next) => {
+  try {
+    const offers = await getOffers();
+    const players = await getPlayers();
+    res.header("Access-Control-Allow-Origin", "*");
+    const offerStats = JSON.parse(offers).flatMap(offer =>{
+      let stat = JSON.parse(players).filter(player => player.purchases.includes(offer.id))
+       return {name: offer.id, stats: stat.length}
+    })
+    res.status(200).json(offerStats);
   } catch (error) {
     res.status(500).send(error.toString());
   }

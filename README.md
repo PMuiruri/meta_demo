@@ -20,10 +20,10 @@ npx json-server --watch <data_file.json>
 More instructions on installing JSON Server can be found [here](https://github.com/typicode/json-server)
 
 ### Backend Setup
--Ensure nodes run time version 16.X is installed.
+Ensure nodes run time version 16.X is installed.
 
--Move to the Server directory of this package
--Install all dependencies 
+Move to the Server directory of this package
+Install all dependencies 
 ```
 npm install
 ```

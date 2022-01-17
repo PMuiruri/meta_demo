@@ -48,4 +48,7 @@ npm start
 ## App Visibility
 If all installations are successfull and the JSON Server from [http://localhost:3000](http://localhost:3000) and Node Server from [http://localhost:3030](http://localhost:3030) are running, the app can be viewed from [http://localhost:3001](http://localhost:3001) to view it in your browser.
 
+![](./Screenshot/preview.png)
+
+
 The app runs the client side of the app in the development mode.

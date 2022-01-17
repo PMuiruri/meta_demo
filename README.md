@@ -2,7 +2,7 @@
 
 ## The Challenge
 
-The challenge in this project was to create a simple web based dashboard that would used to explore a gaming dataset. The dashboard presents statistics that provide insights into the game players' metrics.
+The challenge in this project was to create a simple web based dashboard that is used to explore a gaming dataset. The dashboard presents statistics that provide insights into the game players' metrics.
 
 ## Overall Architecture
 - Database: A JSON [server](https://github.com/typicode/json-server) is used to store and serve the data.

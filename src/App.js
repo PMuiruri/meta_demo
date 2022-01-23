@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Dashboard } from './Components/Dashboard'
 import './App.css';
 

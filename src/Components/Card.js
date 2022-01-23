@@ -7,9 +7,9 @@ import {
   Tooltip,
   Legend, 
   Cell,
-  PieChart, Pie, Sector, 
+  PieChart, Pie, 
 } from "recharts";
-import { Card, H1, H3, H2, Text, MiniCard } from './StyledComponents';
+import { Card, H1, H3, H2, MiniCard, } from './StyledComponents';
 
 
 export const DashboardCard = ({ amount, name}) =>{
@@ -33,15 +33,10 @@ export const OverviewCard = ({ name, amount }) =>{
 export const SimpleChart = ({ data }) => {
   return (
     <BarChart
+      style={{margin: 'auto'}}
       width={980}
       height={300}
       data={data}
-      margin={{
-        top: 50,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />

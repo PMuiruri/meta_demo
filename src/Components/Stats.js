@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { OverviewCard, SimpleChart } from "./Card";
-import { Row, H2, H3 } from './StyledComponents';
+import { Row, H2} from './StyledComponents';
 
 export const Stats = () =>{
 
@@ -73,12 +73,12 @@ export const Stats = () =>{
         <OverviewCard name={'Lowest Total Logins'} amount={playerStats.minlogins}/>
         <OverviewCard name={'Amount of Users Below AVG Spend'} amount={playerStats.usersBelowMeanSpend}/>
       </Row>
-      <Row>
-        <H3 green style={{ alignSelf: 'center'}}>Players By Segment</H3>
+      <Row hidden>
+        <H2 style={{ alignSelf: 'center'}}>Players By Segment</H2>
         <SimpleChart data={segmentStats}/>
       </Row>
-      <Row>
-        <H3 green style={{ alignSelf: 'center'}}>Players By Offers/purchases</H3>
+      <Row hidden>
+        <H2 style={{ alignSelf: 'center'}}>Players By Offers/purchases</H2>
         <SimpleChart data={offerStats}/>
       </Row>
     </>

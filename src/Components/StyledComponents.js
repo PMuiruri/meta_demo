@@ -27,8 +27,8 @@ const MiniCard = styled.div`
 
 const H3 = styled.h3`
   font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
+  font-weight: bold;
+  font-size: 14px;
   line-height: 20px;
   text-align: center;
   letter-spacing: 4px;
@@ -65,8 +65,14 @@ const Row = styled.div`
   display: flex;
   width: 100%;
   height: auto;
+  margin: 2em;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: ${props => props.hidden ? `column` : `row`};
+  @media (max-width: 768px) {
+    display: ${props => props.hidden ? `none` : `flex`};
+    flex-direction: column;
+
+  }
 `
 
   export {
